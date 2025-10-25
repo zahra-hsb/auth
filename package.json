@@ -1,0 +1,32 @@
+{
+  "name": "secure-express-auth",
+  "version": "0.1.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev" : "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmirHMohammadi1/secure-express-auth.git"
+  },
+  "author": "AmirHMohammadi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmirHMohammadi1/secure-express-auth/issues"
+  },
+  "homepage": "https://github.com/AmirHMohammadi1/secure-express-auth#readme",
+  "description": "🔐 Secure Express.js Authentication API with JWT & Security Best Practices A production-ready Node.js authentication system featuring user registration, login, JWT tokens, password hashing, input validation, rate limiting, and comprehensive security measures. Perfect for Iranian/Persian developers. ",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "nodemon": "^3.1.10"
+  }
+}
