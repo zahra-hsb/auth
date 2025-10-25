@@ -1,10 +1,9 @@
+import type { ApiResponseType, LoginFormType } from "~/schemas/types"
 
 
-export async function loginServerAction(data: unknown) {
+export async function loginServerAction(data: LoginFormType) {
     "use server"
-    console.log(data)
-    // const responseOfLogin = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
-    const responseOfLogin = await fetch(`http://localhost:3000/api/auth/login`, {
+    const responseOfLogin = await fetch(`${import.meta.env.API_URL || 'http://localhost:3000'}/api/auth/login`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -12,6 +11,5 @@ export async function loginServerAction(data: unknown) {
         body: JSON.stringify(data)
     })
     const result = await responseOfLogin.json()
-    console.log(data, responseOfLogin, result)
-    return 'Login was successful!'
+    return result as ApiResponseType
 }

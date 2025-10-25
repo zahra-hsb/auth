@@ -10,30 +10,27 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
+import type { ApiResponseType, LoginFormType } from '~/schemas/types';
 
 const LoginForm = () => {
-    const [isShowToast, setShowToast] = useState({ isShow: false, message: "", error: false })
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm({
+    
+    const [isShowToast, setShowToast] = useState<{
+        isShow: boolean;
+        message: string;
+        error: boolean;
+    }>({ isShow: false, message: "", error: false });
+
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormType>({
         resolver: zodResolver(LoginSchema)
     })
-    const values = getValues()
-    const mutation = useMutation({
-        mutationFn: () => fetch(`http://localhost:3000/api/auth/login`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
-        }),
-        // TODO add dialogue or toast to show the success message
+
+    const mutation = useMutation<ApiResponseType, unknown, LoginFormType>({
+        mutationFn: (formData: LoginFormType) => loginServerAction(formData),
         onSuccess: async (res) => {
-            const result = await res.json()
-            
-            console.log(result)
 
             setShowToast({
                 isShow: true,
-                message: String(result.message),
+                message: res.message,
                 error: false
             })
         },
